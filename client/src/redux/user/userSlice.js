@@ -21,13 +21,11 @@ const userSlice = createSlice({
       state.token = null;
       state.isAuthenticated = false;
     },
-    updateUserProfile: (state, action) => {
-      state.user = { ...state.user, ...action.payload };
-    },
+   
   },
 });
 
-export const { login, logout, updateUserProfile } = userSlice.actions;
+export const { login, logout} = userSlice.actions;
 
 export const selectUser = (state) => state.user.user;
 export const selectToken = (state) => state.user.token;
