@@ -38,7 +38,6 @@ const Login = () => {
       setLoading(true);
       try {
         const response = await api.post('/users/login', { email, password });
-        console.log("Response", response.data);
         if (response.data.token) {
           dispatch(login({ user: response.data.user, token: response.data.token }));
           localStorage.setItem('token', response.data.token);

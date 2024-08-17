@@ -24,13 +24,22 @@ exports.login = async (req, res) => {
     if (!user || !(await user.comparePassword(password))) {
       return res.status(400).json({ error: 'Invalid credentials' });
     }
-
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
+    res.json({
+      user: {
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        mobile: user.mobile,
+        email: user.email,
+      },
+      token: token,
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 
 exports.getProfile = async (req, res) => {
